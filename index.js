@@ -9,9 +9,9 @@ const getInput = require('readline').createInterface({
 })
 
 getInput.question('Ingresa tu ruta:', (ruta) => {
-  const absolutePath = (ruta) => path.isAbsolute(ruta);
-  // === true ? "Es absoluta" : "No es absoluta";
-  console.log(absolutePath(ruta));
+  // const absolutePath = (ruta) => path.isAbsolute(ruta);
+  // // === true ? "Es absoluta" : "No es absoluta";
+  // console.log(absolutePath(ruta));
 getInput.close()
 })
 
