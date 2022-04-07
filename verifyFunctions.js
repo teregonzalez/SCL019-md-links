@@ -1,7 +1,16 @@
+const fs = require('fs');
 const path = require('path');
 
-const absolutePath = (ruta) => path.isAbsolute(ruta);
+const existRoot = (ruta) => fs.existsSync(ruta);
+
+const verifyAbsolute = (ruta) => path.isAbsolute(ruta);
+
+const transformAbsolute = (ruta) => path.resolve(ruta); 
+
+const verifyDirectory = (ruta) => 
 
 module.exports = {
-    absolutePath
+    existRoot,
+    verifyAbsolute,
+    transformAbsolute
 }
