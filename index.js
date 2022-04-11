@@ -3,7 +3,12 @@ const fs = require('fs');
 const readline = require('readline')
 const path = require('path');
 
-const { existRoot, verifyAbsolute, transformAbsolute } = require('./verifyFunctions')
+const { 
+  existRoot, 
+  verifyAbsolute, 
+  transformAbsolute,
+  verifyDirectory,
+ } = require('./verifyFunctions')
 
 const getInput = require('readline').createInterface({
   input:process.stdin,
@@ -13,9 +18,9 @@ const getInput = require('readline').createInterface({
 getInput.question('Ingresa tu ruta: ', (ruta) => {
 
   if(existRoot(ruta)){
-    verifyAbsolute(ruta) ? ruta : transformAbsolute(ruta);
+    verifyAbsolute(ruta) ? verifyDirectory(ruta) : transformAbsolute(ruta);
   }else{
-    process.stdout.write('No existe') 
+    process.stdout.write('El archivo no existe') 
   }
   
 getInput.close()
