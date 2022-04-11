@@ -1,6 +1,11 @@
 // const mdLinks = require('../');
 // const {verifyRoot} = require('../index')
-const {existRoot, verifyAbsolute, transformAbsolute} = require('../verifyFunctions')
+const {
+    existRoot, 
+    verifyAbsolute, 
+    transformAbsolute,
+    getMdArchive
+} = require('../verifyFunctions')
 
 
 // describe('test in verifyRoot', () => {
@@ -66,4 +71,21 @@ describe('test in existRoot', () => {
 
       expect(result).toBe(false);
   });
+
+  describe('Test in getMdArchive', () => {
+    it('should return "El archivo NO es md" for package.json', () => {
+      const ruta = 'package.json'
+
+      const result = getMdArchive(ruta);
+
+    expect(result).toBe("El archivo NO es md");
+    })
+    it('should return "El archivo es md" for README.md', () => {
+        const ruta = 'README.md'
+  
+        const result = getMdArchive(ruta);
+  
+      expect(result).toBe("El archivo es md");
+      })
+  })
 });

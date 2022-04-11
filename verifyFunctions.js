@@ -11,9 +11,9 @@ const verifyAbsolute = (ruta) => path.isAbsolute(ruta);
 const transformAbsolute = (ruta) => path.resolve(ruta); 
 
 const verifyDirectory =  (ruta) => {
-    var stats = fs.statSync(ruta);
+    const stats = fs.statSync(ruta);
     if(stats.isDirectory()){
-        process.stdout.write('El archivo es directorio') 
+        return 'El archivo es directorio'
     }else{
         getMdArchive(ruta)
     }
@@ -21,9 +21,9 @@ const verifyDirectory =  (ruta) => {
 
 const getMdArchive = (ruta) => {
     if(path.extname(ruta) === '.md'){
-        process.stdout.write('El archivo es md') 
+        return 'El archivo es md'
     }else{
-        process.stdout.write('El archivo NO es md') 
+        return 'El archivo NO es md'
     }
 }
 
@@ -51,4 +51,5 @@ module.exports = {
     verifyAbsolute,
     transformAbsolute,
     verifyDirectory,
+    getMdArchive
 }
