@@ -8,6 +8,7 @@ const {
   verifyAbsolute, 
   transformAbsolute,
   verifyDirectory,
+  getMdArchive,
  } = require('./verifyFunctions')
 
 const getInput = require('readline').createInterface({

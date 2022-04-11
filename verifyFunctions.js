@@ -1,33 +1,46 @@
 const fs = require('fs');
 const path = require('path');
 
-//Opción valida
+// Opción valida
 const existRoot = (ruta) => fs.existsSync(ruta);
 
-//Verifica si es o no ruta absoluta
+// Verifica si es o no ruta absoluta
 const verifyAbsolute = (ruta) => path.isAbsolute(ruta);
 
-//Transforma ruta relativa a absoluta
-const transformAbsolute = (ruta) => path.resolve(ruta); 
+// Transforma ruta relativa a absoluta
+const transformAbsolute = (ruta) => path.resolve(ruta);
 
-const verifyDirectory =  (ruta) => {
-    const stats = fs.statSync(ruta);
-    if(stats.isDirectory()){
-        return 'El archivo es directorio'
-    }else{
-        getMdArchive(ruta)
-    }
+// Verifica si es o no directorio
+const verifyDirectory = (ruta) => fs.statSync(ruta).isDirectory();
+
+// const verifyDirectory =  (ruta) => {
+//     const stats = fs.statSync(ruta);
+//     if(stats.isDirectory()){
+//         checkDirectory(ruta)
+//     }else{
+//         getMdArchive(ruta)
+//     }
+// }
+
+const checkDirectory = (ruta) => {
+    fs.readdir(ruta, (err, files) => {
+        if (err) {
+            console.log(err);
+        } else {
+            files.forEach(file => {
+                console.log(file);
+            })
+        }
+    })
 }
 
 const getMdArchive = (ruta) => {
-    if(path.extname(ruta) === '.md'){
+    if (path.extname(ruta) === '.md') {
         return 'El archivo es md'
-    }else{
+    } else {
         return 'El archivo NO es md'
     }
 }
-
-
 
 
 // new Promise((resolve, reject) => {
@@ -42,14 +55,15 @@ const getMdArchive = (ruta) => {
 //       }
 //       return resolve(false);
 //      });
-//   })
+// })
 
-// const verifyDirectory = (ruta) => 
+// const verifyDirectory = (ruta) =>
 
 module.exports = {
     existRoot,
     verifyAbsolute,
     transformAbsolute,
     verifyDirectory,
-    getMdArchive
+    getMdArchive,
+    checkDirectory
 }

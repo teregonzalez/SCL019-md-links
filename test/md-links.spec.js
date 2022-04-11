@@ -4,7 +4,9 @@ const {
     existRoot, 
     verifyAbsolute, 
     transformAbsolute,
-    getMdArchive
+    getMdArchive,
+    verifyDirectory,
+    checkDirectory
 } = require('../verifyFunctions')
 
 
@@ -86,6 +88,23 @@ describe('test in existRoot', () => {
         const result = getMdArchive(ruta);
   
       expect(result).toBe("El archivo es md");
+      })
+  })
+
+  describe('Test in verifyDirectory', () => {
+    it('should return true for "C:\Users\Gamer\Documents\Laboratoria\SCL019-md-links\test"', () => {
+      const ruta = 'C:\\Users\\Gamer\\Documents\\Laboratoria\\SCL019-md-links\\test'
+
+      const result = verifyDirectory(ruta);
+
+    expect(result).toBe( true );
+    })
+    it('should return false for README.md', () => {
+        const ruta = 'README.md'
+  
+        const result = verifyDirectory(ruta);
+  
+      expect(result).toBe( false );
       })
   })
 });
