@@ -22,26 +22,20 @@ const verifyDirectory = (ruta) => fs.statSync(ruta).isDirectory();
 //     }
 // }
 
-const checkDirectory = (ruta) => {
-    fs.readdir(ruta, (err, files) => {
-        if (err) {
-            console.log(err);
-        } else {
-            files.forEach(file => {
-                console.log(file);
-            })
-        }
-    })
-}
+const getMdArchive = (ruta) => path.extname(ruta) === '.md';
 
-const getMdArchive = (ruta) => {
-    if (path.extname(ruta) === '.md') {
-        return 'El archivo es md'
-    } else {
-        return 'El archivo NO es md'
-    }
-}
-
+// const returnFileUrls = (file) => {
+//     fs.readFile(file, "utf-8", (err, file) => {
+//       const stringLinks = file.match(RegEx);
+//       const newArray = Array.from(stringLinks);
+//       if (err) {
+//         console.log(err);
+//       }
+//       else {
+//         console.log(newArray)
+//       }
+//     });
+//   }
 
 // new Promise((resolve, reject) => {
 //     fs.stat(ruta, (err, stats) => {
@@ -64,6 +58,5 @@ module.exports = {
     verifyAbsolute,
     transformAbsolute,
     verifyDirectory,
-    getMdArchive,
-    checkDirectory
+    getMdArchive
 }
