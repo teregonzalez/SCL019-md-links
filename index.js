@@ -3,14 +3,6 @@ const fs = require('fs');
 const path = require('path');
 const {argv} = require('yargs');
 
-const {
-    existRoot,
-    verifyAbsolute,
-    transformAbsolute,
-    verifyDirectory,
-    getMdArchive
-} = require('./verifyFunctions');
-
 // Guarda tercer argumento por consola
 let ruta = process.argv[2];
 
@@ -31,8 +23,8 @@ const readingDirectory = (ruta) => {
   })
 }
 
-const RegExr = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s\n]+)(?=\))/g
 const returnFileUrls = (file) => {
+  const RegExr = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s\n]+)(?=\))/g
   fs.readFile(file, "utf-8", (err, file) => {
     console.log(file)
     const stringLinks = file.match(RegExr);
@@ -46,27 +38,7 @@ const returnFileUrls = (file) => {
   });
 }
 
-if (existRoot(ruta)) {
-    verifyAbsolute(ruta) ? verifyDirectory(ruta) : transformAbsolute(ruta);
-    if (verifyDirectory(ruta)) {
-      readingDirectory(ruta)
-    } else {
-        if (getMdArchive(ruta)) {
-          if (argv.validate && argv.stats) {
-            console.log('opcion validate y stats');
-          } else if (argv.validate) {
-            console.log('opcion validate');
-          } else if (argv.stats) {
-            console.log('opcion stats');
-          } 
-          
-        } else {
-            console.log('El archivo NO es md')
-        }
-    }
-} else {
-    console.log('El archivo no existe')
+module.exports = {
+  readingDirectory,
+  returnFileUrls
 }
-
-
-
