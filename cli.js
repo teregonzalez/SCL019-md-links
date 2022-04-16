@@ -12,7 +12,8 @@ const {
 } = require('./verifyFunctions');
 
 const {
-    readingDirectory
+    readingDirectory,
+    validateUrls
 } = require('./index');
 
 // Guarda tercer argumento por consola
@@ -28,7 +29,7 @@ if (existRoot(ruta)) {
           if (argv.validate && argv.stats) {
             console.log('opcion validate y stats');
           } else if (argv.validate) {
-            console.log('opcion validate');
+            validateUrls(ruta);
           } else if (argv.stats) {
             console.log('opcion stats');
           } 

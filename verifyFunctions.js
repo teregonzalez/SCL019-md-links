@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 
-// Opción valida
 const existRoot = (ruta) => fs.existsSync(ruta);
 
 const verifyAbsolute = (ruta) => path.isAbsolute(ruta);
