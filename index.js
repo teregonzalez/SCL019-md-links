@@ -57,11 +57,11 @@ const validateUrls = (ruta) => {
                 getHttpStatus(urlData)
                 .then((res) => {
                   if (res.status === 200) {
-                  console.log('Status from', urlData, 'is', res.status, chalk.green('OK ✓'));
+                  console.log(chalk.blue.bold('Status from'), chalk.bgMagentaBright(urlData), chalk.blue.bold('is'), res.status, chalk.green('OK ✓'));
                   } else if (res.status === 301) {
-                    console.log('Status from', urlData, 'is', res.status, chalk.green('OK ✓'));
+                    console.log(chalk.blue.bold('Status from'), chalk.bgMagentaBright(urlData), chalk.blue.bold('is'), res.status, chalk.green('OK ✓'));
                   } else if (res.status !== 200) {
-                  console.log('Status from', urlData, 'is', res.status, chalk.red('FAIL ✕'));
+                  console.log(chalk.blue.bold('Status from'), chalk.bgMagentaBright(urlData), chalk.blue.bold('is'), res.status, chalk.red('FAIL ✕'));
                   }
                 })
                 .catch((err) => {
