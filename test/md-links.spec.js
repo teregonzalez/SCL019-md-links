@@ -17,7 +17,8 @@ describe('test in existRoot', () => {
 
         //acto
         const result = existRoot(ruta);
-//Assert
+        
+        //Assert
         expect(result).toBe(true);
     });
     it('should return "false" for package.json', () => {
