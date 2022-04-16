@@ -4,6 +4,7 @@ const path = require('path');
 const {argv} = require('yargs');
 const url = require('url');
 const https = require('https');
+const chalk = require('chalk');
 
 
 // const { fetch } = require('node-fetch');
@@ -56,11 +57,11 @@ const validateUrls = (ruta) => {
                 getHttpStatus(urlData)
                 .then((res) => {
                   if (res.status === 200) {
-                  console.log('Status from', urlData, 'is', res.status, 'OK ✓');
+                  console.log('Status from', urlData, 'is', res.status, chalk.green('OK ✓'));
                   } else if (res.status === 301) {
-                    console.log('Status from', urlData, 'is', res.status, 'OK ✓');
+                    console.log('Status from', urlData, 'is', res.status, chalk.green('OK ✓'));
                   } else if (res.status !== 200) {
-                  console.log('Status from', urlData, 'is', res.status, 'FAIL ✕');
+                  console.log('Status from', urlData, 'is', res.status, chalk.red('FAIL ✕'));
                   }
                 })
                 .catch((err) => {
@@ -96,7 +97,7 @@ const getHttpStatus = (ruta) => {
             resolve(linkstatus);
         });
 
-        req.on('error', (error) => { // console.error(error);
+        req.on('error', (error) => { 
             const dataerr = {
                 linkname: ruta,
                 status: false
