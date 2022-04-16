@@ -52,7 +52,14 @@ if (existRoot(ruta)) {
       readingDirectory(ruta)
     } else {
         if (getMdArchive(ruta)) {
-          returnFileUrls(ruta);
+          if (argv.validate && argv.stats) {
+            console.log('opcion validate y stats');
+          } else if (argv.validate) {
+            console.log('opcion validate');
+          } else if (argv.stats) {
+            console.log('opcion stats');
+          } 
+          
         } else {
             console.log('El archivo NO es md')
         }
