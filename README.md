@@ -39,11 +39,11 @@ Npm
 
 Inserta en tu código
 
-const mdLinks = require('@teregonzalez/md-links')
+`const mdLinks = require('@teregonzalez/md-links')`
 
 ### En la terminal ingresa
 
-node archivoQueLlamaMdLinks.js archivoMdALeer.md [options]
+`node archivoQueLlamaMdLinks.js archivoMdALeer.md [options]`
 
 ### Opciones
 
@@ -94,4 +94,10 @@ https://www.twitter.com/ Status is 301 OK ✓
 
 ### Flowchart
 
+![flowchart](https://user-images.githubusercontent.com/81347919/163697149-d51f6f10-b059-4b7c-8079-e029174cdcc5.jpg)
+
 ### Github project Backlog 
+
+![backlog](https://user-images.githubusercontent.com/81347919/163697156-980bce9c-134f-43a8-b617-65b03d1dac84.png)
+
+
