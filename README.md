@@ -39,7 +39,7 @@ Npm
 
 Inserta en tu código
 
-const mdLinks = require('@teregonzalez/md-links')
+`const mdLinks = require('@teregonzalez/md-links')`
 
 ### En la terminal ingresa
 
