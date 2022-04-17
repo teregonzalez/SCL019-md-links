@@ -14,8 +14,7 @@ const {
 const {
     readingDirectory,
     validateUrls,
-    statsUrls,
-    // defaultOption
+    statsUrls
 } = require('./index');
 
 // Guarda tercer argumento por consola
@@ -35,11 +34,10 @@ if (existRoot(ruta)) {
             validateUrls(ruta);
           } else if (argv.stats) {
             statsUrls(ruta);
-          } 
-          // else {
-          //   defaultOption(ruta)
-          // }
-          
+          } else {
+            validateUrls(ruta);
+            statsUrls(ruta);
+          }
         } else {
             console.log('El archivo NO es md')
         }

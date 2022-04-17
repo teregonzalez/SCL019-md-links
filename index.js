@@ -5,17 +5,9 @@ const {argv} = require('yargs');
 const url = require('url');
 const https = require('https');
 const chalk = require('chalk');
-const {onlyUnique,
-  transformAbsolute,
-  getMdArchive} = require('./verifyFunctions');
-
-// const { fetch } = require('node-fetch');
-// const {fetch} = require('fetch');
-// const {fetchUrl} = fetch.fetchUrl;
-
+const { onlyUnique } = require('./verifyFunctions');
 
 // Guarda tercer argumento por consola
-let ruta = process.argv[2];
 const RegExr = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s\n]+)(?=\))/g
 
 // Lee el directorio
