@@ -60,7 +60,9 @@ Permitirá ejecutar ambas opciones.
 
 Ingresa los siguientes valores en la terminal:
 
-`$ node cli.js [TULINK] [OPCIÓN]`
+```sh
+$ node cli.js [TULINK] [OPCIÓN]
+```
 
 De las siguientes formas:
 
