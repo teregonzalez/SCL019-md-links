@@ -48,18 +48,6 @@ describe('test in verifyAbsolute', () => {
     });
 });
 
-// describe('test in checkDirectory', () => {
-// it('should return I dont know', () => {
-//       const ruta = 'C:\\Users\\Gamer\\Documents\\Laboratoria\\SCL019-md-links\\prueba'
-//       const file = 'pruebaLinks.md'
-
-//       const result = checkDirectory(ruta);
-
-//       expect(result).toEqual(file);
-// });
-// });
-
-
 describe('test in transformAbsolute', () => {
     it('should return "C:\\Users\\Gamer\\Documents\\Laboratoria\\SCL019-md-links\\package.json" for package.json', () => {
         const ruta = 'package.json'
