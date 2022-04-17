@@ -23,7 +23,7 @@ Md-links es un librería que nos permite verificar el estado y recibir otras est
 
 ## 4. Documentación técnica
 
-###Tener instalado:
+### Debes tener instalado:
 
 ```sh
 node.js
@@ -31,21 +31,22 @@ Npm
 
 ```
 
-###Instalación
+### Instalación
 
 `$ npm i @teregonzalez/md-links`
 
-###Uso
+### Uso
 
 Inserta en tu código
 
 const mdLinks = require('@teregonzalez/md-links')
 
-###En la terminal ingresa
+### En la terminal ingresa
 
 node archivoQueLlamaMdLinks.js archivoMdALeer.md [options]
 
-###Opciones
+### Opciones
+
 `--validate`
 Arrojará una lista con los links, su status y si es valido o no.
 
@@ -55,7 +56,7 @@ Arrojará una lista con los links, su status y si es valido o no.
 `--validate --stats`
 Permitirá ejecutar ambas opciones.
 
-###Cómo ejecutar
+### Cómo ejecutar
 
 Ingresa los siguientes valores en la terminal:
 
