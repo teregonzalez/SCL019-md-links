@@ -5,7 +5,9 @@ const {argv} = require('yargs');
 const url = require('url');
 const https = require('https');
 const chalk = require('chalk');
-
+const {onlyUnique,
+  transformAbsolute,
+  getMdArchive} = require('./verifyFunctions');
 
 // const { fetch } = require('node-fetch');
 // const {fetch} = require('fetch');
@@ -14,6 +16,7 @@ const chalk = require('chalk');
 
 // Guarda tercer argumento por consola
 let ruta = process.argv[2];
+const RegExr = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s\n]+)(?=\))/g
 
 // Lee el directorio
 const readingDirectory = (ruta) => {
@@ -23,15 +26,12 @@ const readingDirectory = (ruta) => {
                 return reject(error);
             } else {
                 return resolve(data.forEach((file) => {
-                    if (path.extname(file) === '.md') {
-                        return console.log(file);
-                    }
+                      console.log(file);
                 }));
             }
         })
     })
 }
-const RegExr = /(((https?:\/\/)|(http?:\/\/)|(www\.))[^\s\n]+)(?=\))/g
 
 const returnFileUrls = (file) => {
     fs.readFile(file, "utf-8", (err, file) => {
@@ -46,6 +46,32 @@ const returnFileUrls = (file) => {
     });
 }
 
+const statsUrls = (ruta) => {
+    fs.readFile(ruta, "utf-8", (err, data) => { // entra al archivo
+        const stringLinks = data.match(RegExr);
+        let arrayStatus = Array.from(stringLinks);
+        let brokenLinks = [];
+        console.log('Total links: ', stringLinks.length);
+
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('Unique links: ', onlyUnique(arrayStatus));
+        }
+        stringLinks.map((urlData) => {
+          getHttpStatus(urlData).then((res) => {
+            if(res.status>=400){
+              brokenLinks.push(res.status)
+            }
+          }).catch((err) => {
+              console.log(err.code);
+          });
+      });
+        // console.log(data);
+    });
+}
+
+
 const validateUrls = (ruta) => {
     fs.readFile(ruta, "utf-8", (err, data) => { // entra al archivo
         const stringLinks = data.match(RegExr);
@@ -54,20 +80,19 @@ const validateUrls = (ruta) => {
             console.log(err);
         } else {
             stringLinks.forEach((urlData) => {
-                getHttpStatus(urlData)
-                .then((res) => {
-                  if (res.status === 200) {
-                  console.log(chalk.blue.bold('Status from'), chalk.bgMagentaBright(urlData), chalk.blue.bold('is'), res.status, chalk.green('OK ✓'));
-                  } else if (res.status === 301) {
-                    console.log(chalk.blue.bold('Status from'), chalk.bgMagentaBright(urlData), chalk.blue.bold('is'), res.status, chalk.green('OK ✓'));
-                  } else if (res.status !== 200) {
-                  console.log(chalk.blue.bold('Status from'), chalk.bgMagentaBright(urlData), chalk.blue.bold('is'), res.status, chalk.red('FAIL ✕'));
-                  }
-                })
-                .catch((err) => {
-                  console.log(err.code);
+                getHttpStatus(urlData).then((res) => {
+                    if (res.status === 200) {
+                        console.log(chalk.bgMagenta(urlData), chalk.blue.bold('Status is'), chalk.green(res.status + ' OK ✓'));
+                    } else if (res.status === 301) {
+                        console.log(chalk.bgMagenta(urlData), chalk.blue.bold('Status is'), chalk.green(res.status + ' OK ✓'));
+                    } else if (res.status !== 200) {
+                        console.log(chalk.bgMagenta(urlData), chalk.blue.bold('Status is'), chalk.red(res.status + ' FAIL ✕'));
+                    }
+
+                }).catch((err) => {
+                    console.log(err.code);
                 });
-        });
+            });
         }
     });
 }
@@ -85,8 +110,7 @@ const getHttpStatus = (ruta) => {
             const linkstatus = {
                 linkname: ruta,
                 Code: res.statusCode,
-                status: 
-                    res.statusCode
+                status: res.statusCode
             };
 
             // console.log('1req', linkstatus);
@@ -97,7 +121,7 @@ const getHttpStatus = (ruta) => {
             resolve(linkstatus);
         });
 
-        req.on('error', (error) => { 
+        req.on('error', (error) => {
             const dataerr = {
                 linkname: ruta,
                 status: false
@@ -113,5 +137,6 @@ module.exports = {
     readingDirectory,
     returnFileUrls,
     validateUrls,
-    getHttpStatus
+    getHttpStatus,
+    statsUrls
 }

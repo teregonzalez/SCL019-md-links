@@ -13,7 +13,8 @@ const {
 
 const {
     readingDirectory,
-    validateUrls
+    validateUrls,
+    statsUrls
 } = require('./index');
 
 // Guarda tercer argumento por consola
@@ -27,11 +28,12 @@ if (existRoot(ruta)) {
         if (getMdArchive(ruta)) {
             //Comprueba opcion ingresada
           if (argv.validate && argv.stats) {
-            console.log('opcion validate y stats');
+            validateUrls(ruta);
+            statsUrls(ruta);
           } else if (argv.validate) {
             validateUrls(ruta);
           } else if (argv.stats) {
-            console.log('opcion stats');
+            statsUrls(ruta);
           } 
           
         } else {

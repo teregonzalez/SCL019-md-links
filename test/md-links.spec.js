@@ -6,7 +6,7 @@ const {
     transformAbsolute,
     getMdArchive,
     verifyDirectory,
-    checkDirectory
+    onlyUnique
 } = require('../verifyFunctions')
 
 
@@ -109,5 +109,16 @@ describe('Test in verifyDirectory', () => {
         const result = verifyDirectory(ruta);
 
         expect(result).toBe(false);
+    })
+
+    describe('Test in onliUnique', () => {
+        it('Should return only unique values', () => {
+            const links = [1,2,3,4,1,1,3,5];
+            const output = 5;
+
+            const result = onlyUnique(links);
+
+            expect(result).toEqual(output);
+        })
     })
 });

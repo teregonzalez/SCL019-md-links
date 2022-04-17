@@ -11,10 +11,13 @@ const verifyDirectory = (ruta) => fs.statSync(ruta).isDirectory();
 
 const getMdArchive = (ruta) => path.extname(ruta) === '.md';
 
+const onlyUnique = (links) => links.filter((v, i, a) => a.indexOf(v) === i).length;
+
 module.exports = {
     existRoot,
     verifyAbsolute,
     transformAbsolute,
     verifyDirectory,
-    getMdArchive
+    getMdArchive,
+    onlyUnique
 }
