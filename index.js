@@ -47,16 +47,17 @@ const returnFileUrls = (file) => {
 }
 
 const statsUrls = (ruta) => {
-    fs.readFile(ruta, "utf-8", (err, data) => { // entra al archivo
+    fs.readFile(ruta, "utf-8", (err, data) => { 
+      // console.log(data);// entra al archivo
         const stringLinks = data.match(RegExr);
         let arrayStatus = Array.from(stringLinks);
         let brokenLinks = [];
-        console.log('Total links: ', stringLinks.length);
+        console.log(chalk.magenta.bold('Total links: '), stringLinks.length);
 
         if (err) {
             console.log(err);
         } else {
-            console.log('Unique links: ', onlyUnique(arrayStatus));
+            console.log(chalk.magenta.bold('Unique links: '), onlyUnique(arrayStatus));
         }
         stringLinks.map((urlData) => {
           getHttpStatus(urlData).then((res) => {
@@ -82,11 +83,11 @@ const validateUrls = (ruta) => {
             stringLinks.forEach((urlData) => {
                 getHttpStatus(urlData).then((res) => {
                     if (res.status === 200) {
-                        console.log(chalk.bgMagenta(urlData), chalk.blue.bold('Status is'), chalk.green(res.status + ' OK ✓'));
+                        console.log(chalk.bgBlueBright(urlData), chalk.blue.bold('Status is'), chalk.green(res.status + ' OK ✓'));
                     } else if (res.status === 301) {
-                        console.log(chalk.bgMagenta(urlData), chalk.blue.bold('Status is'), chalk.green(res.status + ' OK ✓'));
+                        console.log(chalk.bgBlueBright(urlData), chalk.blue.bold('Status is'), chalk.green(res.status + ' OK ✓'));
                     } else if (res.status !== 200) {
-                        console.log(chalk.bgMagenta(urlData), chalk.blue.bold('Status is'), chalk.red(res.status + ' FAIL ✕'));
+                        console.log(chalk.bgBlueBright(urlData), chalk.blue.bold('Status is'), chalk.red(res.status + ' FAIL ✕'));
                     }
 
                 }).catch((err) => {
@@ -96,6 +97,12 @@ const validateUrls = (ruta) => {
         }
     });
 }
+
+// const defaultOption = (ruta) => {
+//     fs.readFile(ruta, "utf-8", (err, data) => { 
+//       console.log(data.matchAll(/\[(.*)\]/g))
+//     })
+// }
 
 const getHttpStatus = (ruta) => {
     return new Promise((resolve) => {
@@ -138,5 +145,6 @@ module.exports = {
     returnFileUrls,
     validateUrls,
     getHttpStatus,
-    statsUrls
+    statsUrls,
+    // defaultOption
 }
