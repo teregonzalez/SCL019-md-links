@@ -43,7 +43,7 @@ Inserta en tu código
 
 ### En la terminal ingresa
 
-node archivoQueLlamaMdLinks.js archivoMdALeer.md [options]
+`node archivoQueLlamaMdLinks.js archivoMdALeer.md [options]`
 
 ### Opciones
 
