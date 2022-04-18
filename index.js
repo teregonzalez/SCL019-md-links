@@ -43,18 +43,20 @@ const statsUrls = (ruta) => {
       // console.log(data);// entra al archivo
         const stringLinks = data.match(RegExr);
         let arrayStatus = Array.from(stringLinks);
-        let brokenLinks = [];
         console.log(chalk.magenta.bold('Total links: '), stringLinks.length);
-
         if (err) {
             console.log(err);
         } else {
             console.log(chalk.magenta.bold('Unique links: '), onlyUnique(arrayStatus));
         }
-        stringLinks.map((urlData) => {
+        let invalid = 0;
+        let valid = 0;
+        arrayStatus.forEach((urlData) => {
           getHttpStatus(urlData).then((res) => {
-            if(res.status>=400){
-              brokenLinks.push(res.status)
+            if(res.status){
+                valid+=1
+            }else{
+                invalid+=1
             }
           }).catch((err) => {
               console.log(err.code);
@@ -90,12 +92,6 @@ const validateUrls = (ruta) => {
     });
 }
 
-// const defaultOption = (ruta) => {
-//     fs.readFile(ruta, "utf-8", (err, data) => { 
-//       console.log(data.matchAll(/\[(.*)\]/g))
-//     })
-// }
-
 const getHttpStatus = (ruta) => {
     return new Promise((resolve) => {
         const options = {
@@ -111,11 +107,6 @@ const getHttpStatus = (ruta) => {
                 Code: res.statusCode,
                 status: res.statusCode
             };
-
-            // console.log('1req', linkstatus);
-            // console.log(`statusCode: ${
-            //     res.statusCode
-            // }`)
 
             resolve(linkstatus);
         });
